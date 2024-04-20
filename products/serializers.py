@@ -7,23 +7,24 @@ from api.serializers import UserPublicSerializer
 
 class productSerializer(serializers.ModelSerializer):
     user = UserPublicSerializer(read_only = True)
-    # my_user_data = serializers.SerializerMethodField(read_only = True)
     edit_url = serializers.SerializerMethodField(read_only = True)
     url = serializers.HyperlinkedIdentityField(view_name = 'product_detail' , lookup_field = 'pk')
     title =serializers.CharField(validators = [validators.validate_title , validators.unique_title_for_all_user])
-    # email = serializers.EmailField(write_only = True)
+
     class Meta:
         model = Product
         fields = [
-            'url',  
-            'edit_url',
             'user',
             'id',
             'title',
             'content', 
             'price',
             'sale_price',
-            # 'my_user_data', 
+            'url',  
+            'edit_url',
+            'public',
+            
+
             ]
         
         
