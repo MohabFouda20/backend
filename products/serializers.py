@@ -10,6 +10,7 @@ class productSerializer(serializers.ModelSerializer):
     edit_url = serializers.SerializerMethodField(read_only = True)
     url = serializers.HyperlinkedIdentityField(view_name = 'product_detail' , lookup_field = 'pk')
     title =serializers.CharField(validators = [validators.validate_title , validators.unique_title_for_all_user])
+    body = serializers.CharField(source = 'content')
 
     class Meta:
         model = Product
@@ -17,7 +18,7 @@ class productSerializer(serializers.ModelSerializer):
             'user',
             'id',
             'title',
-            'content', 
+            'body', 
             'price',
             'sale_price',
             'url',  
