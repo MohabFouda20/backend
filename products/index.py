@@ -5,6 +5,7 @@ from algoliasearch_django.decorators import register
 
 @register(Product)
 class productIndex(AlgoliaIndex):
+    should_index = 'public'
     fields = [
         'title',
         'content',
@@ -12,3 +13,7 @@ class productIndex(AlgoliaIndex):
         'user',
         'public',
     ]
+    settings = {
+        'searchableAttributes': ['title', 'content'],
+        'attributesForFaceting': ['user','public'],
+    }
